@@ -61,6 +61,8 @@ export class AppController {
         res.status(500).send("An error occurred");
       }
     });
+    
+    
 
     // Enforce security
     this.router.use((req: any, res, next) => {
