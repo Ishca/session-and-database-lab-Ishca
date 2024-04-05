@@ -43,7 +43,7 @@ export class AppController {
     this.router.post("/signup", async (req: any, res) => {
       const user = await this.userService.createUser(req.body.username, req.body.email, req.body.password);
       req.session.user = user;
-      res.redirect("/");
+      res.redirect("/login");
     });
 
     // Handle login form submissions
