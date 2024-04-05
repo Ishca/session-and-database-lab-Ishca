@@ -1,11 +1,13 @@
 // Import the express and pino (logger) libraries
 import express, { Application } from "express";
+import session from "express-session";
 import { pino } from 'pino';
 
 // Import our code (controllers and middleware)
-import { AppController } from "./controllers/app.controller";
-import { ErrorMiddleware } from "./middleware/error.middleware";
-import { HandlebarsMiddleware } from "./middleware/handlebars.middleware";
+import { AppController } from "../app/controllers/app.controller";
+import { ErrorMiddleware } from "../app/middleware/error.middleware";
+import { HandlebarsMiddleware } from "../app/middleware/handlebars.middleware";
+import { Cookie } from "express-session";
 
 class App {
   // Create an instance of express, called "app"
@@ -27,6 +29,21 @@ class App {
     // Serve all static resources from the public directory
     this.app.use(express.static(__dirname + "/public"));
 
+    // Alow express to  decode POST submissions
+    this.app.use(express.urlencoded());
+
+    const COOKIE_SECERT = "keyboard cat";
+
+    // Set up session support
+    this.app.use(
+      session({
+        secret: COOKIE_SECERT,
+        resave: false,
+        saveUninitialized: true,
+        cookie: {secure: false}
+      })
+    );
+
     // Set up handlebars for our templating
     HandlebarsMiddleware.setup(this.app);
 
@@ -45,4 +62,4 @@ class App {
   }
 }
 
-export default App;
+export default App;   

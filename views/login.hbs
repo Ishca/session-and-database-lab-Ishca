@@ -1,0 +1,30 @@
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin: 0;
+    }
+
+    form {
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+<header>
+    <title>Welcome to My Website</title>
+</header>
+<form method="POST" action="/login">
+
+    <label for style="color:#c0005a">Username</label>
+    <input type="text" id="username" name="username">
+
+    <label for="password" style="color:#c0005a">Password</label>
+    <input type="password" id="password" name="password">
+
+    <button type="submit">login </button>
+
+</form>
+<a href="./signup">Sign up</a>
