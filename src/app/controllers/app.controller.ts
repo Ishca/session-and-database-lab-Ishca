@@ -8,7 +8,8 @@ export class AppController {
   private log: pino.Logger = pino();
   private userService = new UserService();
 
-  constructor() {
+  constructor(userServices: UserService) {
+    this.userService = userServices;
     this.initializeRouter();
   }
 

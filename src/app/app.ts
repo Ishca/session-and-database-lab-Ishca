@@ -8,6 +8,7 @@ import { AppController } from "../app/controllers/app.controller";
 import { ErrorMiddleware } from "../app/middleware/error.middleware";
 import { HandlebarsMiddleware } from "../app/middleware/handlebars.middleware";
 import { Cookie } from "express-session";
+import { UserService } from "./services/user.services";
 
 class App {
   // Create an instance of express, called "app"
@@ -24,7 +25,8 @@ class App {
 
     // Init the middlware and controllers
     this.errorMiddleware = new ErrorMiddleware();
-    this.appController = new AppController();
+    const userService = new UserService();
+    this.appController = new AppController(userService);
 
     // Serve all static resources from the public directory
     this.app.use(express.static(__dirname + "/public"));
